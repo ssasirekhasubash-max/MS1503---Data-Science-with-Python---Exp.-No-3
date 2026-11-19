@@ -36,25 +36,94 @@ To create a sample retail dataset, identify and handle missing values (`NaN`/`No
 | | `df.describe()` | Generates count, mean, standard deviation, min, quartiles, and max for numerical features |
 
 ## Program
+# Cleaning and Preparing Retail Data using Pandas
+import pandas as pd
 
-#Cleaning and Preparing Retail Data using Pandas
+# Step 1: Create a sample retail dataset
+data = {
+    "Order_ID": [201, 202, 203, 204, 205, 206, 207, 208, 202],
+    "Product": [
+        "Laptop",
+        "Office Chair",
+        "Desk Lamp",
+        "Monitor",
+        "Mechanical Keyboard",
+        "Standing Desk",
+        "Webcam",
+        "USB-C Hub",
+        "Office Chair",
+    ],
+    "Region": [
+        "South",
+        "North",
+        None,
+        "West",
+        "South",
+        "East",
+        "North",
+        None,
+        "North",
+    ],
+    "Sales": [
+        55000.0,
+        12000.0,
+        2500.0,
+        None,
+        8500.0,
+        24000.0,
+        4200.0,
+        None,
+        12000.0,
+    ],
+    "Discount": [0.10, 0.15, None, 0.05, 0.20, None, 0.10, 0.05, 0.15],
+    "Profit": [
+        8200.0,
+        1800.0,
+        None,
+        2400.0,
+        1100.0,
+        3600.0,
+        None,
+        650.0,
+        1800.0,
+    ],
+}
 
-#Step 1: Create a sample retail dataset
+df = pd.DataFrame(data)
+print("=== Original Retail Dataset ===")
+print(df)
+print("Initial Shape (rows, columns):", df.shape)
+print()
 
-#Step 2: Check for missing values
+# Step 2: Check for missing values
+print("=== Missing Values Per Column ===")
+print(df.isnull().sum())
+print()
 
-#Step 3: Fill missing numeric values with column mean
+# Step 3: Fill missing numeric values with column mean
+for col in ["Sales", "Discount", "Profit"]:
+    df[col] = df[col].fillna(df[col].mean())
 
-#Step 4: Fill missing Region with mode (most frequent value)
+# Step 4: Fill missing Region with mode (most frequent value)
+df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
 
-#Step 5: Remove duplicate records
+# Step 5: Remove duplicate records
+df = df.drop_duplicates()
 
-#Step 6: Display summary statistics
+print("=== Cleaned Retail Dataset ===")
+print(df)
+print("Cleaned Shape (rows, columns):", df.shape)
+print("Remaining Missing Values:", df.isnull().sum().sum())
+print()
 
+# Step 6: Display summary statistics
+print("=== Summary Statistics ===")
+print(df.describe())
 
 
 ## Output
-
+<img width="780" height="282" alt="image" src="https://github.com/user-attachments/assets/995b791b-d0cc-403f-833c-82080e8ba7d7" />
+<img width="802" height="747" alt="image" src="https://github.com/user-attachments/assets/7459b3ae-8bd9-46c9-b048-1e9e0bcd0b14" />
 
 ## Result
 The program successfully creates a retail dataset, identifies missing entries and duplicate rows, imputes missing values using mean and mode strategies, removes duplicates, and outputs a clean dataset ready for downstream analysis.
