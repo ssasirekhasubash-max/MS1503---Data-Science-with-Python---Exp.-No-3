@@ -36,89 +36,89 @@ To create a sample retail dataset, identify and handle missing values (`NaN`/`No
 | | `df.describe()` | Generates count, mean, standard deviation, min, quartiles, and max for numerical features |
 
 ## Program
-# Cleaning and Preparing Retail Data using Pandas
-import pandas as pd
-
-# Step 1: Create a sample retail dataset
-data = {
-    "Order_ID": [201, 202, 203, 204, 205, 206, 207, 208, 202],
-    "Product": [
-        "Laptop",
-        "Office Chair",
-        "Desk Lamp",
-        "Monitor",
-        "Mechanical Keyboard",
-        "Standing Desk",
-        "Webcam",
-        "USB-C Hub",
-        "Office Chair",
-    ],
-    "Region": [
-        "South",
-        "North",
-        None,
-        "West",
-        "South",
-        "East",
-        "North",
-        None,
-        "North",
-    ],
-    "Sales": [
-        55000.0,
-        12000.0,
-        2500.0,
-        None,
-        8500.0,
-        24000.0,
-        4200.0,
-        None,
-        12000.0,
-    ],
-    "Discount": [0.10, 0.15, None, 0.05, 0.20, None, 0.10, 0.05, 0.15],
-    "Profit": [
-        8200.0,
-        1800.0,
-        None,
-        2400.0,
-        1100.0,
-        3600.0,
-        None,
-        650.0,
-        1800.0,
-    ],
-}
-
-df = pd.DataFrame(data)
-print("=== Original Retail Dataset ===")
-print(df)
-print("Initial Shape (rows, columns):", df.shape)
-print()
-
-# Step 2: Check for missing values
-print("=== Missing Values Per Column ===")
-print(df.isnull().sum())
-print()
-
-# Step 3: Fill missing numeric values with column mean
-for col in ["Sales", "Discount", "Profit"]:
-    df[col] = df[col].fillna(df[col].mean())
-
-# Step 4: Fill missing Region with mode (most frequent value)
-df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
-
-# Step 5: Remove duplicate records
-df = df.drop_duplicates()
-
-print("=== Cleaned Retail Dataset ===")
-print(df)
-print("Cleaned Shape (rows, columns):", df.shape)
-print("Remaining Missing Values:", df.isnull().sum().sum())
-print()
-
-# Step 6: Display summary statistics
-print("=== Summary Statistics ===")
-print(df.describe())
+    # Cleaning and Preparing Retail Data using Pandas
+    import pandas as pd
+    
+    # Step 1: Create a sample retail dataset
+    data = {
+        "Order_ID": [201, 202, 203, 204, 205, 206, 207, 208, 202],
+        "Product": [
+            "Laptop",
+            "Office Chair",
+            "Desk Lamp",
+            "Monitor",
+            "Mechanical Keyboard",
+            "Standing Desk",
+            "Webcam",
+            "USB-C Hub",
+            "Office Chair",
+        ],
+        "Region": [
+            "South",
+            "North",
+            None,
+            "West",
+            "South",
+            "East",
+            "North",
+            None,
+            "North",
+        ],
+        "Sales": [
+            55000.0,
+            12000.0,
+            2500.0,
+            None,
+            8500.0,
+            24000.0,
+            4200.0,
+            None,
+            12000.0,
+        ],
+        "Discount": [0.10, 0.15, None, 0.05, 0.20, None, 0.10, 0.05, 0.15],
+        "Profit": [
+            8200.0,
+            1800.0,
+            None,
+            2400.0,
+            1100.0,
+            3600.0,
+            None,
+            650.0,
+            1800.0,
+        ],
+    }
+    
+    df = pd.DataFrame(data)
+    print("=== Original Retail Dataset ===")
+    print(df)
+    print("Initial Shape (rows, columns):", df.shape)
+    print()
+    
+    # Step 2: Check for missing values
+    print("=== Missing Values Per Column ===")
+    print(df.isnull().sum())
+    print()
+    
+    # Step 3: Fill missing numeric values with column mean
+    for col in ["Sales", "Discount", "Profit"]:
+        df[col] = df[col].fillna(df[col].mean())
+    
+    # Step 4: Fill missing Region with mode (most frequent value)
+    df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
+    
+    # Step 5: Remove duplicate records
+    df = df.drop_duplicates()
+    
+    print("=== Cleaned Retail Dataset ===")
+    print(df)
+    print("Cleaned Shape (rows, columns):", df.shape)
+    print("Remaining Missing Values:", df.isnull().sum().sum())
+    print()
+    
+    # Step 6: Display summary statistics
+    print("=== Summary Statistics ===")
+    print(df.describe())
 
 
 ## Output
